@@ -1,0 +1,21 @@
+{
+    "name": "meal-planner-angular",
+    "description": "Simple meal planner.",
+    "version": "0.0.0",
+    "homepage": "https://github.com/mrt123/meal-planner-angular",
+    "private": true,
+    "dependencies": {
+        "less.js": "1.3.x",
+        "requirejs": "2.1.14",
+        "requirejs-text":"2.0.12",
+        "bootstrap": "3.2.0",
+        "angular": "1.2.x",
+        "angular-route": "~1.2.x",
+        "angular-resource": "~1.2.x",
+        "angular-animate": "~1.2.x",
+        "jquery": ">=1.6.4",
+        "chosen": "https://github.com/harvesthq/chosen/releases/download/v1.1.0/chosen_v1.1.0.zip",
+        "angular-chosen-localytics": "1.0.6",
+        "angular-ui-select2": "0.0.5"
+    }
+}

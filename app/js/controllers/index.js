@@ -1,0 +1,4 @@
+define([
+    './mealCtrl' ,
+    './foodCtrl'
+], function () {});

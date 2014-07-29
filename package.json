@@ -1,0 +1,7 @@
+{   "name" : "meal-planner-angular",
+    "version" : "0.0.0",
+    "description": "Simple meal planning app developed with AngularJS",
+    "repository": "https://github.com/mrt123/meal-planner-angular",
+    "dependencies" : {
+    }
+}
