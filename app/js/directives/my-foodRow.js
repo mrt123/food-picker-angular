@@ -3,9 +3,8 @@ define([
     "text!./my-foodRow.html"
 ],
     function (directives, template) {
-        // TODO: remove unused template module.
 
-        directives.directive('myFoodRow', [ '$meal', '$foodData', function ($meal, $foodData) {
+        directives.directive('myFoodRow', [ '$meal', '$food', '$foodData', function ($meal, $food, $foodData) {
 
             return {
                 // isolate scope
@@ -13,27 +12,31 @@ define([
                     nutrients: '=columns',  // init columns for chosen food
                     foodData: '=data'   // init drop-down items
                 },
-                // scope is only available in link Functions
+                // scope is only available in link Function
                 link: function ($scope, element, attr) {
-                    $scope.chosenFood = {};
+                    var initialFood = {};
+                    $scope.chosenFood = initialFood;
 
                     // chosenFoodName model comes from template
                     $scope.$watch('chosenFoodName', function () {
 
                         if ($scope['chosenFoodName']) {
                             var food = $foodData.getFoodByName(this.last);
-                            food.gl = null; // gl property will not be provided by $foodData.
-                            if (food !== null)
+                            food.gl = $food.getGlycemicLoad(food); // gl property will not be provided by $foodData.
 
-                            {
-                                $scope.chosenFood = food;
+                            if (food !== null) {
+
+                                // remove food if previously added
+                                if ($scope.chosenFood !== initialFood) {
+                                    $meal.removeFood($scope.chosenFood);
+                                }
                                 $meal.addFood(food);
+                                $scope.chosenFood = food;
                             }
                         }
                     });
                 },
-                template: function() {
-
+                template: function () {
                     return template;
                 }
             };
