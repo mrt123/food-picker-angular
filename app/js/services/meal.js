@@ -3,7 +3,7 @@ define([
 ],
     function (services) {
 
-        services.factory('$meal', [ function () {
+        services.factory('$meal', [ '$rootScope', function ($rootScope) {
 
             var service = {
                 foods: [],
@@ -11,16 +11,21 @@ define([
 
                 addFood: function (food) {
                     service.foods.push(food);
-                    // should we broadcast foodUpdate?
                     return this;
                 },
 
-                getGlicemicLoad: function (food) {
-                    if (typeof food['gi'] === 'number') {
-                         return food['gl'] = food['gi'] * food['amount'];
-                    } else {
-                        return "";
-                    }
+                removeFood: function (foodToRemove) {
+                    // cannot break pointer to existing food array!
+                    var foods = this.foods;
+                    foods.some(function (food, index) {
+                        var match = food === foodToRemove;
+                        if (match) {
+                            // remove food
+                            foods.splice(index, 1);
+                        }
+                        return match; // causes some() to return.
+                    });
+                    return this;
                 },
 
                 /**
@@ -48,6 +53,7 @@ define([
                  *              in this meal.
                  */
                 calculateAllSums: function (nutrients) {
+                    // TODO : verify that no variable pointer is broken during calculation!
                     for (var nutrient in nutrients) {
                         service.nutrientSum[nutrient] = this.calculateSum(nutrient);
                     }

@@ -7,8 +7,9 @@ define(["./module"], function (controllers) {
             $scope.foodData = data;  // used by options for food selection.
         });
 
-        // add first empty food and init foodList scope.
-        $scope.foodList = $meal.addFood({}).foods;
+        // add first empty food and init foods scope.
+        // food list will change not only
+        $scope.foods = $meal.addFood({}).foods;
 
         // init summary scope keys.
         $scope.summary = {
@@ -23,11 +24,10 @@ define(["./module"], function (controllers) {
             "gl": null
         };
 
-        // watch over foodList which is attached on $meal service.
-        $scope.$watch('foodList', function (newValue, oldValue) {
+        // watch over foods which is attached on $meal.foods
+        $scope.$watch('foods', function (newValue, oldValue) {
 
             $scope.summary = $meal.calculateAllSums($scope.summary);
-
         }, true);
     }]);
 });

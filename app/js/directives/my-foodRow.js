@@ -26,17 +26,17 @@ define([
 
                             if (food !== null) {
 
-                                // prevent adding new food if previously added
-                                if ($scope.chosenFood === initialFood)  {
-                                    $meal.addFood(food);
+                                // remove food if previously added
+                                if ($scope.chosenFood !== initialFood) {
+                                    $meal.removeFood($scope.chosenFood);
                                 }
-
+                                $meal.addFood(food);
                                 $scope.chosenFood = food;
                             }
                         }
                     });
                 },
-                template: function() {
+                template: function () {
                     return template;
                 }
             };
