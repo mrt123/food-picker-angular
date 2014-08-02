@@ -5,7 +5,7 @@ define(
         "services/index",
         "directives/index",
         "controllers/index",
-        "filters/nutrientValue"
+        "filters/index"
     ],
     function (ng) {
 

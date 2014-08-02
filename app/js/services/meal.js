@@ -12,6 +12,7 @@ define([
                 addFood: function (food) {
                     service.foods.push(food);
                     // should we broadcast foodUpdate?
+                    return this;
                 },
 
                 /**

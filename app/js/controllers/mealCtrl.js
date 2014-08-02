@@ -4,12 +4,11 @@ define(["./module"], function (controllers) {
 
         // init foodData scope.
         $foodData.fetch().then(function(data){
-            $scope.foodData = data;
+            $scope.foodData = data;  // used by options for food selection.
         });
 
         // add first empty food and init foodList scope.
-        $meal.addFood({});
-        $scope.foodList = $meal.foods;
+        $scope.foodList = $meal.addFood({}).foods;
 
         // init summary scope keys.
         $scope.summary = {
@@ -20,7 +19,8 @@ define(["./module"], function (controllers) {
             "o6": null,
             "monoUnsaturated": null,
             "saturated": null,
-            "calories": null
+            "calories": null,
+            "gl": null
         };
 
         // watch over foodList which is attached on $meal service.

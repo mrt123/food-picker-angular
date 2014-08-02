@@ -1,3 +1,4 @@
 define([
-    './nutrientValue'
+    './calculateNutrientValue',
+    './proximateNutrientValue'
 ], function () {});

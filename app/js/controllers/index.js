@@ -1,4 +1,3 @@
 define([
-    './mealCtrl' ,
-    './foodCtrl'
+    './mealCtrl'
 ], function () {});
