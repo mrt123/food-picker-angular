@@ -14,7 +14,8 @@ define([
                 },
                 // scope is only available in link Function
                 link: function ($scope, element, attr) {
-                    $scope.chosenFood = {};
+                    var initialFood = {};
+                    $scope.chosenFood = initialFood;
 
                     // chosenFoodName model comes from template
                     $scope.$watch('chosenFoodName', function () {
@@ -23,16 +24,19 @@ define([
                             var food = $foodData.getFoodByName(this.last);
                             food.gl = $food.getGlycemicLoad(food); // gl property will not be provided by $foodData.
 
-                            if (food !== null)
-                            {
+                            if (food !== null) {
+
+                                // prevent adding new food if previously added
+                                if ($scope.chosenFood === initialFood)  {
+                                    $meal.addFood(food);
+                                }
+
                                 $scope.chosenFood = food;
-                                $meal.addFood(food);
                             }
                         }
                     });
                 },
                 template: function() {
-
                     return template;
                 }
             };
