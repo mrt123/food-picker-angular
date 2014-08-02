@@ -4,9 +4,9 @@ define(
     ],
     function (filters) {
 
-        filters.filter('nutrientValue', function () {
+        filters.filter('proximateNutrientValue', function () {
             return function (amount) {
-                if (amount) {     
+                if (typeof amount === 'number') {
                     var rounded;
                     if (amount <= 10) {
                         rounded = Math.round(amount * 100) / 100;  // round up to 2 decimal places!
@@ -25,6 +25,5 @@ define(
                 return rounded;
             };
         });
-
     }
 );

@@ -1,3 +1,4 @@
 define([
-    './my-select2'
+    './my-select2',
+    './my-foodRow'
 ], function () {});

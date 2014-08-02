@@ -1,0 +1,17 @@
+<td>
+    <select my-select2 ng-model="chosenFoodName"
+            tabindex="5"
+            class="foodSelector" data-placeholder="choose your food">
+
+        <option value=""></option>
+        <option ng-repeat="food in foodData" value="{{food.name}}">{{food.name}}</option>
+    </select>
+</td>
+<td>
+    <input ng-model="chosenFood.amount" type="number" min="1" max="999" maxlength="3" class="amountSelector"
+           required>
+</td>
+<!--create columns from options passed to directive:-->
+<td ng-repeat="nutrient in nutrients">
+    {{nutrient | calculateNutrientValue:chosenFood | proximateNutrientValue}}
+</td>

@@ -20,50 +20,28 @@
         <th class="omega3">omega3</th>
         <th class="omega6">omega6</th>
     </tr>
-    <!--<tr ng-include="'templates/food.html'" ng-repeat="x in foodList track by $index" class="foodItem selectedFood" ng-controller="FoodCtrl">-->
-        <!--<ng-include src="'templates/food.html'"> </ng-include>-->
-    <!--</tr>-->
 
-    <!--TODO: change FoodCtrl into a directive! -->
-    <!--<tr my-food-row ng-repeat="x in foodList track by $index" class="foodItem selectedFood">-->
-
-    <tr ng-repeat="x in foodList track by $index" class="foodItem selectedFood" ng-controller="FoodCtrl">
-        <td>
-            <select my-select2 ng-model="chosenFoodName"
-                    tabindex="5"
-                    class="foodSelector" data-placeholder="choose your food">
-
-                <option value=""></option>
-                <option ng-repeat="food in foodData" value="{{food.name}}">{{food.name}}</option>
-            </select>
-        </td>
-
-        <td>
-            <input ng-model="chosenFood.amount" type="number" min="1" max="999" maxlength="3" class="amountSelector"
-                   required>
-        </td>
-
-        <td ng-repeat="nutrient in nutrients">{{chosenFood[nutrient] * chosenFood.amount / 100 | nutrientValue}}</td>
-        <td>{{chosenFood.gi}}</td>
-        <td>{{chosenFood.gi  * chosenFood.amount / 100 | nutrientValue}}</td>
-    </tr>
+    <tr my-food-row ng-repeat="x in foodList track by $index"
+        data="foodData"
+        columns="['protein', 'complex', 'sugar', 'o3', 'o6', 'monoUnsaturated', 'saturated', 'calories', 'gi', 'gl']"
+        class="foodItem selectedFood">
 
     <tr class="summary">
         <td rowspan="2">Total</td>
         <td rowspan="2"></td>
-        <td rowspan="2">{{summary.protein | nutrientValue}}</td>
-        <td>{{summary.complex | nutrientValue}}</td>
-        <td>{{summary.sugar | nutrientValue}}</td>
-        <td>{{summary.o3 | nutrientValue}}</td>
-        <td>{{summary.o6 | nutrientValue}}</td>
-        <td>{{summary.monoUnsaturated | nutrientValue}}</td>
-        <td>{{summary.saturated | nutrientValue}}</td>
-        <td rowspan="2">{{summary.calories | nutrientValue}}</td>
-        <td rowspan="2">{{gi}}</td>
-        <td rowspan="2">{{}}</td>
+        <td rowspan="2">{{summary.protein | proximateNutrientValue}}</td>
+        <td>{{summary.complex | proximateNutrientValue}}</td>
+        <td>{{summary.sugar | proximateNutrientValue}}</td>
+        <td>{{summary.o3 | proximateNutrientValue}}</td>
+        <td>{{summary.o6 | proximateNutrientValue}}</td>
+        <td>{{summary.monoUnsaturated | proximateNutrientValue}}</td>
+        <td>{{summary.saturated | proximateNutrientValue}}</td>
+        <td rowspan="2">{{summary.calories | proximateNutrientValue}}</td>
+        <td rowspan="2">N/A</td>
+        <td rowspan="2">{{summary.gl | proximateNutrientValue}}</td>
     </tr>
     <tr class="summary">
-        <td colspan="2" class="carbsSummaryValue">{{summary.carbs | nutrientValue}}</td>
-        <td colspan="4" class="fatSummaryValue">{{summary.fat | nutrientValue}}</td>
+        <td colspan="2" class="carbsSummaryValue">{{summary.carbs | proximateNutrientValue}}</td>
+        <td colspan="4" class="fatSummaryValue">{{summary.fat | proximateNutrientValue}}</td>
     </tr>
 </table>
