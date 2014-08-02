@@ -1,15 +1,13 @@
 define([
     "./module",
-    "select2",
-    "text!./my-select2.html"
+    "select2"
 ],
-    function (directives, select2, template) {
-        // TODO: remove unused template module.
+    function (directives, select2) {
 
         directives.directive('mySelect2', function () {
 
             return {
-                // scope is only available in link Functions
+                // scope is only available in link Function
                 link: function ($scope, element, attr) {
 
                     $scope.$watch('foodData', function () {

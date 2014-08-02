@@ -18,10 +18,6 @@ define(
                     else {
                         return nutrientValue * amount / 100;
                     }
-
-                }
-                else if (nutrientName === "gl") {   // gl should never be a number
-                    return food['gi'] * amount / 100;
                 }
                 else {
                     return "";

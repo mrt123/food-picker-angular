@@ -15,6 +15,14 @@ define([
                     return this;
                 },
 
+                getGlicemicLoad: function (food) {
+                    if (typeof food['gi'] === 'number') {
+                         return food['gl'] = food['gi'] * food['amount'];
+                    } else {
+                        return "";
+                    }
+                },
+
                 /**
                  *
                  * @param nutrientName
