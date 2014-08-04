@@ -57,13 +57,17 @@ a:active {
 
 #container {
   position: relative;
-  width: 990px;
+  width: 873px;  // consider table is 100% of this.
   margin: 0 auto;
 
-  table.meal {
-    margin: 20px;
-    width: 100%;
+  .my-table-word-wrap() {
+    width: 100%;  // of container!
     word-wrap: break-word;
+  }
+
+  table.meal {
+    .my-table-word-wrap();
+    margin: 20px;
     background-color: white;
     border-collapse: collapse;
 
@@ -73,9 +77,8 @@ a:active {
         border: 3px solid white;
         font-family: Arial, sans-serif;
         font-size: 12px;
-        min-width: 57px;
         font-weight: normal;
-        padding: 2px 0px;
+        padding: 1px 4px;
         color: white;
         background: rgba(0, 99, 255, 0.58);
       }
@@ -105,7 +108,7 @@ a:active {
           }
         }
 
-        input#foodAmount {
+        input.amountSelector {
           margin: 0px 0px 0px 0px;
           width: 35px;
         }
@@ -126,7 +129,7 @@ a:active {
         }
 
         .foodSelector {
-          width: 265px;
+          width: 200px;
           padding-left: 5px;
           display: inline-block;
 
