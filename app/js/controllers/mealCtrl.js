@@ -11,6 +11,7 @@ define(["./module"], function (controllers) {
         // food list will change not only
         $scope.foods = $meal.addFood({}).foods;
 
+        // TODO: move nutrient list to meal service? or have meal own default nutrients?
         // init summary scope keys.
         $scope.summary = {
             "protein": null,
