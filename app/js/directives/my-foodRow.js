@@ -10,29 +10,31 @@ define([
                 // isolate scope
                 scope: {
                     nutrients: '=columns',  // init columns for chosen food
-                    foodData: '=data'   // init drop-down items
+                    foodData: '=data',   // to init drop-down items
+                    /**
+                     *  -   & binding allows a directive to trigger evaluation of an expression
+                     *      in the context of the original scope
+                     *  -   call to delete on the isolated scope actually evaluates the expression on owning controller
+                     */
+                    'publishFood': '&onPublish',
+                    'delete': '&onDelete',
+                    'resetSelection' : '@'
+
                 },
                 // scope is only available in link Function
                 link: function ($scope, element, attr) {
-                    var initialFood = {};
-                    $scope.chosenFood = initialFood;
+                    $scope.chosenFood = {};
 
-                    // chosenFoodName model comes from template
-                    $scope.$watch('chosenFoodName', function () {
-
+                    $scope.$watch('chosenFoodName', function(newFoodName, oldFoodName, $scope) {
+                        // oldFood will be null when can't be found in data.
                         if ($scope['chosenFoodName']) {
-                            var food = $foodData.getFoodByName(this.last);
-                            food.gl = $food.getGlycemicLoad(food); // gl property will not be provided by $foodData.
 
-                            if (food !== null) {
+                            // define onPublish expression for this directive.
+                            var foodUpdate = getFoodUpdate(newFoodName, oldFoodName, $foodData, $food);
+                            $scope.publishFood({'foodUpdate': foodUpdate});
 
-                                // remove food if previously added
-                                if ($scope.chosenFood !== initialFood) {
-                                    $meal.removeFood($scope.chosenFood);
-                                }
-                                $meal.addFood(food);
-                                $scope.chosenFood = food;
-                            }
+                            // populate columns
+                            $scope.chosenFood = foodUpdate.newFood;
                         }
                     });
                 },
@@ -40,6 +42,14 @@ define([
                     return template;
                 }
             };
+
+            function getFoodUpdate(newFoodName, oldFoodName, foodDataService, foodService) {
+                // food data in foodDataService is loaded in the controller.
+                var oldFood = foodDataService.getFoodByName(oldFoodName);
+                var newFood = foodDataService.getFoodByName(newFoodName);
+                newFood.gl = foodService.getGlycemicLoad(newFood); // gl property will not be provided by $foodData.
+                return {'newFood': newFood, 'oldFood': oldFood };
+            }
         }]);
     }
 );

@@ -21,9 +21,13 @@
         <th class="omega6">omega6</th>
     </tr>
 
-    <tr my-food-row ng-repeat="x in foods track by $index"
+
+    <tr my-food-row ng-repeat="x in presentedFoods | orderBy:'$index' : reverse"
         data="foodData"
+        on-publish="amendMeal(foodUpdate)"
+        reset-selection="{{$last}}"
         columns="['protein', 'complex', 'sugar', 'o3', 'o6', 'monoUnsaturated', 'saturated', 'calories', 'gi', 'gl']"
+        on-delete="removeFoodAtIndex($index)"
         class="foodItem selectedFood">
 
     <tr class="summary">

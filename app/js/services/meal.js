@@ -5,27 +5,33 @@ define([
 
         services.factory('$meal', [ '$rootScope', function ($rootScope) {
 
+            // consider: methods should not break pointer to .food array!
             var service = {
                 foods: [],
                 nutrientSum: {},
 
                 addFood: function (food) {
                     service.foods.push(food);
-                    return this;
                 },
 
                 removeFood: function (foodToRemove) {
-                    // cannot break pointer to existing food array!
-                    var foods = this.foods;
-                    foods.some(function (food, index) {
-                        var match = food === foodToRemove;
+                    service.foods.splice(this.getFoodIndex(foodToRemove), 1);
+                },
+
+                removeAtIndex: function (index) {
+                    this.foods.splice(index, 1);
+                },
+
+                getFoodIndex: function(foodToFind){
+                    var foundIndex = null;
+                    this.foods.some(function (food, index) {
+                        var match = food === foodToFind;
                         if (match) {
-                            // remove food
-                            foods.splice(index, 1);
+                            foundIndex = index;
+                            return true;
                         }
-                        return match; // causes some() to return.
                     });
-                    return this;
+                    return foundIndex;
                 },
 
                 /**
@@ -35,8 +41,8 @@ define([
                  */
                 calculateSum: function (nutrientName) {
                     var sum = 0;
-                    // for all foods (except first - first food in foodList is always empty)
-                    for (var i = 1; i < service.foods.length; i++) {
+
+                    for (var i = 0; i < service.foods.length; i++) {
                         var food = service.foods[i];
                         if (food['amount'] !== undefined) {
                             sum += food[nutrientName] * food['amount'] / 100;
