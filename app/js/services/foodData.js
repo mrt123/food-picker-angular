@@ -20,19 +20,20 @@ define([
 
                 getFoodByName: function (name) {
                     var matchedFood = null;
-                    service.data.some(function (food) {
-                        var match = (food.name.toLowerCase() === name.toLowerCase());
-                        if (match) {
-                            matchedFood = food;
-                            return match;
-                        }
-                    });
+                    if (name !== undefined) {
+                        service.data.some(function (food) {
+                            var match = (food.name.toLowerCase() === name.toLowerCase());
+                            if (match) {
+                                matchedFood = food;
+                                return match;
+                            }
+                        });
+                    }
                     return matchedFood;
                 }
             };
 
             return service;
-
         }]);
     }
 );

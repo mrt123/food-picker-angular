@@ -1,15 +1,15 @@
 define(["./module"], function (controllers) {
 
-    controllers.controller('MealCtrl', ['$scope', '$foodData', '$meal', function ($scope, $foodData, $meal) {
+    controllers.controller('MealCtrl', ['$scope', '$foodData', '$meal', '$food', function ($scope, $foodData, $meal, $food) {
 
-        // init foodData scope.
-        $foodData.fetch().then(function(data){
+        // init foodData scope. TODO: consider more suitable place for loading data.
+        $foodData.fetch().then(function (data) {
             $scope.foodData = data;  // used by options for food selection.
         });
 
-        // add first empty food and init foods scope.
-        // food list will change not only
-        $scope.foods = $meal.addFood({}).foods;
+        // separate foods in service from foods that are presented!
+        $scope.mealFoods = $meal.foods;   // to track meal summary!
+        $scope.presentedFoods = [{}];
 
         // TODO: move nutrient list to meal service? or have meal own default nutrients?
         // init summary scope keys.
@@ -25,9 +25,38 @@ define(["./module"], function (controllers) {
             "gl": null
         };
 
-        // watch over foods which is attached on $meal.foods
-        $scope.$watch('foods', function (newValue, oldValue) {
+        // used by on-delete!
+        $scope.removeFoodAtIndex = function (index) {
+            $meal.removeAtIndex(index);
+            $scope.presentedFoods.splice(index, 1);
+        };
 
+        $scope.amendMeal = function (foodUpdate) {
+
+            var newFood = foodUpdate.newFood;
+            var oldFood = foodUpdate.oldFood;
+
+            if (newFood !== null) {
+
+                // when choosing consecutively in the same food row!
+                if (oldFood !== null) {
+
+                    $meal.removeFood(oldFood);
+                    // food row remains untouched.
+                }
+                else {
+                    // ads new empty food row!
+                    $scope.presentedFoods.push({});
+                }
+                $meal.addFood(newFood);
+            }
+        };
+
+        /**
+         * watch over mealFoods to generate
+         * last argument: 'true', ensures deep equality is checked!
+         */
+        $scope.$watch('mealFoods', function (newValue, oldValue) {
             $scope.summary = $meal.calculateAllSums($scope.summary);
         }, true);
     }]);
