@@ -27,7 +27,8 @@ define(["./module"], function (controllers) {
 
         // used by on-delete!
         $scope.removeFoodAtIndex = function (index) {
-            $meal.removeAtIndex(index);
+            // index in meal may not be the same as index in presentedFoods
+            $meal.removeAtIndex($meal.foods.length -1 - index);
             $scope.presentedFoods.splice(index, 1);
         };
 
