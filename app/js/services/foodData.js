@@ -1,5 +1,5 @@
 define([
-    "./module"
+    "./_services-ng-module"
 ],
     function (services) {
 

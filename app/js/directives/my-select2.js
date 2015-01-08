@@ -1,5 +1,5 @@
 define([
-    "./module",
+    "./_directives-ng-module",
     "select2"
 ],
     function (directives, select2) {

@@ -921,5 +921,31 @@
         "saturated": 0,
         "calories": 304,
         "gi": ""
+    },
+    {
+        "name": "prawn",
+        "amount": 100,
+        "protein": 21,
+        "complex": 0,
+        "sugar": 0,
+		"o3": 0.34,
+        "o6": 0.02,
+        "monoUnsaturated": 0.2,
+        "saturated": 0.3,
+        "calories": 99,
+        "gi": ""
+    },
+    {
+        "name": "alpro coconut supplement",
+        "amount": 100,
+        "protein": 0.1,
+        "complex": 0.8,
+        "sugar": 1.9,
+		"o3": 0,
+        "o6": 0,
+        "monoUnsaturated": 0.0,
+        "saturated": 0.9,
+        "calories": 20,
+        "gi": ""
     }
 ]

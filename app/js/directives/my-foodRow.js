@@ -1,5 +1,5 @@
 define([
-    "./module",
+    "./_directives-ng-module",
     "text!./my-foodRow.html"
 ],
     function (directives, template) {

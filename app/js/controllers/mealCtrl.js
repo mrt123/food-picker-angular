@@ -1,4 +1,4 @@
-define(["./module"], function (controllers) {
+define(["./_controllers-ng-module"], function (controllers) {
 
     controllers.controller('MealCtrl', ['$scope', '$foodData', '$meal', '$food', function ($scope, $foodData, $meal, $food) {
 

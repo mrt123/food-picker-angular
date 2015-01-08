@@ -2,10 +2,10 @@ define(
     [
         "angular",
         "angular-route",
-        "services/index",
-        "directives/index",
-        "controllers/index",
-        "filters/index"
+        "services/_services-loader",
+        "directives/_directives-loader",
+        "controllers/_controllers-loader",
+        "filters/_filters-loader"
     ],
     function (ng) {
 

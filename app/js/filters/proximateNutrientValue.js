@@ -1,6 +1,6 @@
 define(
     [
-        "./module"
+        "./_filters-ng-module"
     ],
     function (filters) {
 
