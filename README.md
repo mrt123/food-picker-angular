@@ -1,4 +1,4 @@
-meal-planner-angular
+food-picker-angular
 ====================
 
-Project Demo : http://mrt123.github.io/meal-planner-angular/app   (development version).
+Project Demo : http://mrt123.github.io/food-picker-angular/app.
