@@ -25,7 +25,7 @@ define(["./_controllers-ng-module"], function (controllers) {
             "gl": null
         };
 
-        // used by on-delete!
+        // used by on-delete in food-row!
         $scope.removeFoodAtIndex = function (index) {
             // index in meal may not be the same as index in presentedFoods
             $meal.removeAtIndex($meal.foods.length -1 - index);

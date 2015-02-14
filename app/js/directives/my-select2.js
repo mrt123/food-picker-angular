@@ -23,6 +23,7 @@ define([
                         }
                     };
 
+                    // initialize drop down and select2 functionality on data change!
                     $scope.$watch('foodData', function () {
                         element.select2();
                         element.on('change',
